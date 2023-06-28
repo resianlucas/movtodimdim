@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<script defer
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<title>DimDim</title>
+</head>
+<body>
+	<header th:replace="~{base :: header}"></header>
+
+	<div class="container py-3" style="margin-top: 60px;">
+		<div class="d-flex justify-content-between align-items-center">
+			<h2 class="fw-light text-uppercase pb-2"
+				th:text="|Transações de ${cliente.name}|"></h2>
+			<a th:href="@{/transaction/new/{id}(id=${cliente.id})}" class="btn btn-info"><i class="bi bi-credit-card-fill"></i> Nova Transação</a>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Descrição</th>
+					<th scope="col">Tipo</th>
+					<th scope="col">Valor</th>
+					<th scope="col">Data</th>
+				</tr>
+			</thead>
+			<tbody th:each="history: ${historico}">
+				<tr class="align-middle">
+					<th scope="row" th:text="${history.id}"></th>
+					<td th:text="${history.description}"></td>
+					<td
+						th:text="${history.type == T(br.com.dimdim.model.TransactionType).DEBIT} ? 'DÉBITO' : 'CRÉDITO'"></td>
+					<td
+						th:text="|R$ ${#numbers.formatDecimal(history.value, 1, 2, 'COMMA')}|"></td>
+					<td th:text="${#dates.format(history.date, 'dd/MM/yyyy')}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer th:replace="~{base :: footer}"></footer>
+</body>
+</html>
