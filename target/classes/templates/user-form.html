@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<script defer
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<title>DimDim</title>
+</head>
+<body>
+	<header th:replace="~{base :: header}"></header>
+
+	<div class="container py-3" style="margin-top: 60px;">
+		<h2 class="fw-light text-uppercase pb-2">Novo Usuário</h2>
+		<form action="/user" method="post" th:object="${user}">
+			<div class="mb-3">
+				
+				<p class="alert alert-danger" th:errors="*{name}"></p>
+				<label for="nome" class="form-label"> Nome do Cliente </label> 
+				<input type="text" class="form-control" id="nome" name="name" placeholder="Rick Sanchez"  th:field="*{name}" >
+				
+			</div>
+			<div class="mb-3">
+			
+				<p class="alert alert-danger" th:errors="*{balance}"></p>
+				<label for="saldo" class="form-label">Saldo Inicial</label>
+				<input type="number" class="form-control"
+					id="saldo" step="any" name="balance" min="0" th:field="*{balance}" value="0">
+			</div>
+			<button type="submit" class="btn btn-primary">Enviar</button>
+		</form>
+	</div>
+
+	<footer th:replace="~{base :: footer}"></footer>
+
+</body>
+</html>

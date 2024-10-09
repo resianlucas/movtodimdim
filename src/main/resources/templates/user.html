@@ -27,7 +27,7 @@
 					<th scope="col"></th>
 					<th scope="col">Nome</th>
 					<th scope="col">Saldo</th>
-					<th scope="col"></th>
+					<th scope="col">Ações</th> <!-- Coluna para ações -->
 				</tr>
 			</thead>
 			<tbody th:each="user: ${usuarios}">
@@ -36,7 +36,21 @@
 					<td th:text="${user.name}"></td>
 					<td
 						th:text="|R$ ${#numbers.formatDecimal(user.balance, 1, 2, 'COMMA')}|"></td>
-					<td><a th:href="@{/transaction/{id}(id=${user.id})}" class="btn btn-primary">Transações</a></td>
+					<td>
+						<!-- Botão para visualizar transações -->
+						<a th:href="@{/transaction/{id}(id=${user.id})}" class="btn btn-primary">Transações</a>
+
+						<!-- Botão para editar o usuário -->
+						<a th:href="@{/user/edit/{id}(id=${user.id})}" class="btn btn-warning">
+							<i class="bi bi-pencil-fill"></i> Editar
+						</a>
+
+						<!-- Botão para deletar o usuário -->
+						<a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-danger" 
+						   onclick="return confirm('Tem certeza que deseja deletar este usuário?');">
+							<i class="bi bi-trash-fill"></i> Deletar
+						</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>

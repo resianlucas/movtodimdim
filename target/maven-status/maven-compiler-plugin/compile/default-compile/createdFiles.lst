@@ -1,0 +1,8 @@
+br\com\dimdim\model\Transaction.class
+br\com\dimdim\repository\UserRepository.class
+br\com\dimdim\model\User.class
+br\com\dimdim\model\TransactionType.class
+br\com\dimdim\repository\TransactionRepository.class
+br\com\dimdim\DimdimApplication.class
+br\com\dimdim\controller\UserController.class
+br\com\dimdim\controller\TransactionController.class
